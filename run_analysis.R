@@ -1,4 +1,3 @@
-library(reshape2)
 library(dplyr)
 library(data.table)
 
@@ -16,9 +15,9 @@ if (!dir.exists(dataDir)) {
 }
 
 activityNames <- fread(file.path(dataDir, 'activity_labels.txt'),
-                            col.names=c("label","name"), data.table=FALSE)
+                            col.names=c("label","name"))
 features <- fread(file.path(dataDir, 'features.txt'),
-                        col.names=c("class","name"), data.table=FALSE)
+                        col.names=c("class","name"))
 
 #
 # readDataSet:
@@ -29,11 +28,11 @@ features <- fread(file.path(dataDir, 'features.txt'),
 
 readDataSet <- function(setName, subjectFile, xFile, yFile) {
         # Read subjects
-        subject <- fread(file.path(dataDir, setName, subjectFile), col.names="subject", data.table=FALSE)
+        subject <- fread(file.path(dataDir, setName, subjectFile), col.names="subject")
         # Read x data. Use feature names from file 'features.txt'
-        X <- fread(file.path(dataDir, setName, xFile), data.table=FALSE, col.names=features$name)
+        X <- fread(file.path(dataDir, setName, xFile), col.names=features$name)
         # Read y data. Convert the activity numbers to the names from file 'activity_labels.txt'
-        Y <- fread(file.path(dataDir, setName, yFile), col.names="activity", data.table=FALSE) %>%
+        Y <- fread(file.path(dataDir, setName, yFile), col.names="activity") %>%
                 mutate(activity = factor(sapply(activity, function (a) activityNames[a,]$name)))
         # Combine these all to one large table of train data
         cbind(data.frame(source = rep(setName, length(subject))), subject, Y, X)
