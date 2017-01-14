@@ -76,6 +76,8 @@ The values for these variables are computed by combining the train and test data
 variables from the combined dataset, grouping by `activity` and `subject` and taking the mean for each variable. See
 file `run_analysis.R` for details.
 
+The value of each of these variables is normalized and bounded within [-1,1]
+
 In addition the dataset contains variables `activity` and `subject`.
 
 The complete list of variables (81) in the tidy dataset is:
