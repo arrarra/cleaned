@@ -17,3 +17,6 @@ It contains the following files:
 * LICENSE
 * README.md
 * cleaned.Rproj
+
+You can remake the analysis by executing the script run_analysis.R in R.
+
