@@ -18,5 +18,5 @@ It contains the following files:
 * README.md
 * cleaned.Rproj
 
-You can remake the analysis by executing the script run_analysis.R in R.
-
+You can remake the analysis by executing the script run_analysis.R in R. The script takes care of downloading and
+unzipping the original data, if it is not already available in the directory.
