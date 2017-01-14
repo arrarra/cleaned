@@ -48,18 +48,19 @@ fulldata <- rbind(trainData, testData)
 
 # Select only interesting columns, e.g., those for mean and std variables.
 
-meanAndStdVariables <- features[grep("-(mean|std)[(][)]", features$name),]$name
+meanAndStdVariables <- features[grep("-(mean|std)", features$name),]$name
 interestingVariables <- c(colnames(fulldata)[1:3], meanAndStdVariables)
 meanAndStdData <- fulldata[,interestingVariables]
 
 # Write this interesting data into a file
 write.table(meanAndStdData, 'mean_and_std_data.txt', row.name=FALSE)
 
+# Generate the result tidy dataset
 averageData <- meanAndStdData %>%
         group_by(activity, subject) %>%
         summarize_each(funs(mean), 4:ncol(meanAndStdData))
 
-# Write avarageData into a file
+# Write tidy dataset into a file
 write.table(averageData, 'average_data.txt', row.name=FALSE)
 
 # Write the variables available in the tidy dataset into a file
